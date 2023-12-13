@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense } from 'react';
+import React, { Profiler, Suspense } from 'react';
 import AsyncComponent from '../src/AsyncComponent';
 
 // 异步加载数据的函数
@@ -11,12 +11,25 @@ const fetchData = () => {
   });
 };
 function App() {
+  const onRender = (
+    id,
+    phase,
+    actualDuration,
+    baseDuration,
+    startTime,
+    commitTime
+  ) => {
+    console.log(id, phase, actualDuration, baseDuration, startTime, commitTime);
+  };
+  console.log('App-render');
   return (
     <div>
       <h1>My App</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <AsyncComponent />
-      </Suspense>
+      <Profiler id='App' onRender={onRender}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <AsyncComponent />
+        </Suspense>
+      </Profiler>
     </div>
   );
 }
