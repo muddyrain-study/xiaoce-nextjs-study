@@ -9,7 +9,7 @@ export default function Error({ error, reset }) {
 
   return (
     <div>
-      <h2>Something went wrong!</h2>
+      <h2>Something went wrong 无误!</h2>
       <button
         onClick={
           // 尝试恢复
